@@ -1,5 +1,10 @@
 # scaffit
+
 A Go utility to consistently scaffold Go projects.
+
+[![Build](https://github.com/jedi-knights/scaffit/actions/workflows/build.yml/badge.svg)](https://github.com/jedi-knights/scaffit/actions/workflows/build.yml)
+[![Lint](https://github.com/jedi-knights/scaffit/actions/workflows/lint.yml/badge.svg)](https://github.com/jedi-knights/scaffit/actions/workflows/lint.yml)
+[![Test](https://github.com/jedi-knights/scaffit/actions/workflows/test.yml/badge.svg)](https://github.com/jedi-knights/scaffit/actions/workflows/test.yml)
 
 ## References
 
