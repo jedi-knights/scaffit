@@ -1,0 +1,31 @@
+name: Commit Lint
+
+on:
+  push:
+    branches:
+      - '**'
+
+env:
+  GO_VERSION: 1.21.2
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Export Commit Message
+        run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%s)" >> $GITHUB_ENV
+
+      - name: Lint Commit Message
+        run: echo "$COMMIT_MESSAGE" | npx commitlint
