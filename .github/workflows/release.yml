@@ -1,24 +1,6 @@
 name: Release
 
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release'
-        required: true
-        default: '0.0.0'
-      tag:
-        description: 'Tag to release'
-        required: true
-        default: 'v0.0.0'
-      changelog:
-        description: 'Changelog for release'
-        required: true
-        default: 'CHANGELOG.md'
-      github_token:
-        description: 'GitHub Token'
-        required: true
-        default: '${{ secrets.GITHUB_TOKEN }}'
+on: workflow_dispatch
 
 env:
   NODE_VERSION: 18
