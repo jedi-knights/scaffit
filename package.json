@@ -1,0 +1,29 @@
+{
+  "name": "scaffit",
+  "version": "0.0.1",
+  "description": "A Go utility to consistently scaffold Go projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jedi-knights/scaffit.git"
+  },
+  "keywords": [
+    "Go",
+    "Scaffold",
+    "jedi-knights"
+  ],
+  "author": "Omar Crosby <omar.crosby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jedi-knights/scaffit/issues"
+  },
+  "homepage": "https://github.com/jedi-knights/scaffit#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.3"
+  }
+}

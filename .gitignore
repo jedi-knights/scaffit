@@ -26,3 +26,6 @@ go.work
 # VS Code
 .vscode
 
+# Node.js
+package-lock.json
+
