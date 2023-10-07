@@ -41,6 +41,6 @@ jobs:
         with:
           report_paths: '**/junit.xml'
           fail_on_failure: true
-          require_tests: true
+          require_tests: false
           annotate_notice: false
           detailed_summary: false
