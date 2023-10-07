@@ -22,8 +22,10 @@ jobs:
           cache: false
 
       - name: Install Dependencies
+        run: go mod tidy
+
+      - name: Install Utilities
         run: |
-          go mod download
           go install go.uber.org/mock/mockgen@v0.2.0
 
       - name: Generate Mocks

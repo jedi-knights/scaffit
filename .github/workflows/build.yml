@@ -22,7 +22,7 @@ jobs:
           cache: false
 
       - name: Install Dependencies
-        run: go mod download
+        run: go mod tidy
 
       - name: Compile
         run: go build -v ./...
