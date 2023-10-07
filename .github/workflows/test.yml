@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '**'
+      
+env:
+  GO_VERSION: 1.21.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
+
+      - name: Install Dependencies
+        run: |
+          go mod download
+          go install go.uber.org/mock/mockgen@v0.2.0
+          go install github.com/onsi/ginkgo/v2/ginkgo@v2.12.1
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: '**/junit.xml'
+          fail_on_failure: true
+          require_tests: true
+          annotate_notice: false
+          detailed_summary: false
