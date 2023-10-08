@@ -20,8 +20,10 @@ jobs:
     uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
 
   test:
+    needs: [commitlint, lint]
     uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
 
   build:
+    needs: test
     uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
     secrets: inherit
