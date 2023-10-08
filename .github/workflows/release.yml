@@ -6,9 +6,19 @@ env:
   NODE_VERSION: 18
   GO_VERSION: 1.21.2
 
+
 jobs:
   release:
     runs-on: ubuntu-latest
+
+    # A new permissions key supported at the workflow and job level enables you
+    # to specify which permissions you want for the token. Any permission that
+    # is absent from the list will be set to none.
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -23,4 +33,6 @@ jobs:
         run: npm install
 
       - name: Semantic Release
-        run: npx semantic-release@18
+        run: npx semantic-release
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
