@@ -76,10 +76,18 @@ module.exports = {
             }
         ],
 
-        ['@semantic-release/git', {
-            assets: ['./public/**/*', 'package.json', 'package-lock.json', 'CHANGELOG.md', 'VERSION'],
-            message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-        }],
+        [
+            // semantic-release plugin to commit release assets to the project's git repository.
+            // https://github.com/semantic-release/git
+            //
+            // The Git user associated with the Git credentials has to be able to push commit to the release branch.
+            '@semantic-release/git',
+            {
+                assets: ['./public/**/*', 'package.json', 'package-lock.json', 'CHANGELOG.md', 'VERSION'],
+                message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+            }
+        ],
+
         [
             // semantic-release plugin to publish a GitHub release and comment on released pull requests/issues.
             // https://github.com/semantic-release/github

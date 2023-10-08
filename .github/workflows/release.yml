@@ -5,6 +5,7 @@ on: workflow_dispatch
 env:
   NODE_VERSION: 18
   GO_VERSION: 1.21.2
+  GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
 
 jobs:
@@ -33,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Semantic Release
-        run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+        run: npx semantic-release
 

@@ -11,6 +11,7 @@ A Go utility to consistently scaffold Go projects.
 ## References
 
 - [Reusing Workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
+- [Using Semantic-Release with GitHub Actions](https://levelup.gitconnected.com/using-semantic-release-with-github-actions-c30d197829f1)
 - [Semantic Release Configuration](https://semantic-release.gitbook.io/semantic-release/usage/configuration)
 - [How to Use Cobra and Viper to Create Your First Golang CLI Tool](https://betterprogramming.pub/step-by-step-using-cobra-and-viper-to-create-your-first-golang-cli-tool-8050d7675093)
 - [Building and Testing Go with GitHub Acitons](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go)
