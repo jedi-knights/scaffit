@@ -15,25 +15,25 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Trigger Commitlint Workflow
-        uses: actions/workflow-dispatch@v2
+        uses: actions/workflow-dispatch@v1
         with:
           workflow: commitlint.yml  # Replace with the actual filename of your commitlint workflow
           ref: ${{ github.sha }}
 
       - name: Trigger Lint Workflow
-        uses: actions/workflow-dispatch@v2
+        uses: actions/workflow-dispatch@v1
         with:
           workflow: lint.yml  # Replace with the actual filename of your lint workflow
           ref: ${{ github.sha }}
 
       - name: Trigger Test Workflow
-        uses: actions/workflow-dispatch@v2
+        uses: actions/workflow-dispatch@v1
         with:
           workflow: test.yml  # Replace with the actual filename of your test workflow
           ref: ${{ github.sha }}
 
       - name: Trigger Build Workflow
-        uses: actions/workflow-dispatch@v2
+        uses: actions/workflow-dispatch@v1
         with:
           workflow: build.yml  # Replace with the actual filename of your build workflow
           ref: ${{ github.sha }}
