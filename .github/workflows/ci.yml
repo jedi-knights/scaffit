@@ -41,3 +41,4 @@ jobs:
     uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
     with:
       GO_VERSION: ${{ env.GO_VERSION }}
+
