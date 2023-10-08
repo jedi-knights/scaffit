@@ -1,11 +1,13 @@
 name: Release
 
-on: workflow_dispatch
+on:
+  pull_request:
+    types:
+      - closed
 
 env:
   NODE_VERSION: 18
   GO_VERSION: 1.21.2
-
 
 jobs:
   release:
