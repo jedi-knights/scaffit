@@ -31,4 +31,3 @@ jobs:
         with:
           NODE_VERSION: ${{ env.NODE_VERSION }}
           GO_VERSION: ${{ env.GO_VERSION }}
-          GH_TOKEN: ${{ env.GH_TOKEN }}
