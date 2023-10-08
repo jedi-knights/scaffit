@@ -22,40 +22,41 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"fmt"
+	"github.com/jedi-knights/scaffit/pkg"
 	"github.com/spf13/cobra"
+	"log"
 )
 
-// newCmd represents the new command
-var newCmd = &cobra.Command{
-	Use:   "new",
-	Short: "Creates a new component.",
-	Args:  cobra.ExactArgs(1), // We expect exactly 1 non-flag argument
-	Long: `The new command creates new components.
+// versionCmd represents the version command
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version number of the application.",
+	Long:  `Print the version number of the application then exit.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		var (
+			err     error
+			version string
+		)
 
-For example:
+		if version, err = pkg.ReadVersion(); err != nil {
+			log.Fatalf("Error reading version: %v\n", err)
+		}
 
-> scaffit new api
-
-> scaffit new module
-
-> scaffit new cli
-
-There will be several entities that can be created with the new command.`,
+		fmt.Printf("%s\n", version)
+	},
 }
 
 func init() {
-	rootCmd.AddCommand(newCmd)
+	rootCmd.AddCommand(versionCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// newCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// versionCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// newCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
-	newCmd.PersistentFlags().StringP("location", "l", "~/go/src", "The location to create the component in.")
-	_ = newCmd.MarkFlagDirname("location")
+	// versionCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -11,24 +12,44 @@ import (
 // Use underscores or camelCase for multi-word module names. For example, mylibrary or
 // myLibrary.
 func ValidateModulePath(input string) error {
-	if len(input) < 1 {
-		return fmt.Errorf("Module name must be at least 1 character")
-	}
+	// Split the input string on '/'
+	parts := strings.Split(input, "/")
 
-	// Check to ensure the input is all lowercase
-	if input != strings.ToLower(input) {
-		return fmt.Errorf("Module name must be lowercase")
-	}
+	// Check each part individually
+	for _, part := range parts {
+		if containsSpecialCharacters(part) {
+			return fmt.Errorf("Module path part contains special characters: %s", part)
+		}
 
-	// Check to ensure the input does not contain hyphens
-	if strings.Contains(input, "-") {
-		return fmt.Errorf("Module name cannot contain hyphens")
-	}
+		if containsWhitespace(part) {
+			return fmt.Errorf("Module path part contains whitespace characters: %s", part)
+		}
 
-	// Check to ensure the input does not contain special characters
-	if strings.ContainsAny(input, "!@#$%^&*()+=-`~[]{}\\|;:'\",.<>?") {
-		return fmt.Errorf("Module name cannot contain special characters")
+		if !strings.Contains(part, ".") && !strings.Contains(part, "_") && !isCamelCase(part) {
+			return fmt.Errorf("Module path part is not in camel case: %s", part)
+		}
 	}
 
 	return nil
+}
+
+func containsSpecialCharacters(part string) bool {
+	// Regular expression pattern to check for special characters, allowing underscores
+	// The pattern allows special characters !@#$%^&*()+=-`~[]{}\\|;:'\",<>\\(\\)?_.
+	pattern := "[!@#$%^&*()+=-`~\\[\\]{}\\\\|;:'\",<>\\(\\)?_]"
+	return regexp.MustCompile(pattern).MatchString(part)
+}
+
+func isCamelCase(part string) bool {
+	// Regular expression pattern to check if a string is in camel case
+	// The pattern checks for lowercase letters followed by uppercase letters.
+	pattern := "^[a-z]+(?:[A-Z][a-z]*)*$"
+	return regexp.MustCompile(pattern).MatchString(part)
+}
+
+func containsWhitespace(part string) bool {
+	// Regular expression pattern to check for whitespace characters
+	// The pattern checks for any whitespace character (space, tab, newline, etc.).
+	pattern := "\\s"
+	return regexp.MustCompile(pattern).MatchString(part)
 }

@@ -22,40 +22,47 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"github.com/jedi-knights/scaffit/pkg/generators"
+	"log"
+
 	"github.com/spf13/cobra"
 )
 
-// newCmd represents the new command
-var newCmd = &cobra.Command{
-	Use:   "new",
-	Short: "Creates a new component.",
-	Args:  cobra.ExactArgs(1), // We expect exactly 1 non-flag argument
-	Long: `The new command creates new components.
+// moduleCmd represents the module command
+var moduleCmd = &cobra.Command{
+	Use:   "module",
+	Short: "Creates a new module component.",
+	Long:  `Creates a new module component.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		var (
+			err      error
+			location string
+		)
 
-For example:
+		if location, err = newCmd.Flags().GetString("location"); err != nil {
+			log.Fatalf("Error reading location: %v\n", err)
+		}
 
-> scaffit new api
+		if err = generators.NewModuleGenerator(location).Generate(); err != nil {
+			log.Fatalf("Error generating module: %v\n", err)
+		}
 
-> scaffit new module
-
-> scaffit new cli
-
-There will be several entities that can be created with the new command.`,
+		log.Printf("location: %s\n", location)
+	},
 }
 
 func init() {
-	rootCmd.AddCommand(newCmd)
+	newCmd.AddCommand(moduleCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// newCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// moduleCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// newCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// moduleCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-	newCmd.PersistentFlags().StringP("location", "l", "~/go/src", "The location to create the component in.")
-	_ = newCmd.MarkFlagDirname("location")
+	_ = moduleCmd.MarkFlagRequired("location")
 }
