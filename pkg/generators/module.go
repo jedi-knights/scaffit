@@ -2,7 +2,7 @@ package generators
 
 import (
 	"github.com/jedi-knights/scaffit/pkg/fsys"
-	"github.com/jedi-knights/scaffit/utils"
+	"github.com/jedi-knights/scaffit/pkg/golang"
 	"github.com/manifoldco/promptui"
 	"log"
 )
@@ -32,7 +32,7 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	prompt := promptui.Prompt{
 		Label:    "Module path",
-		Validate: utils.ValidateModulePath,
+		Validate: golang.ValidateModulePath,
 	}
 
 	if modulePath, err = prompt.Run(); err != nil {
