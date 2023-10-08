@@ -8,6 +8,7 @@ on:
 env:
   NODE_VERSION: 18
   GO_VERSION: 1.21.2
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
@@ -25,16 +26,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Release
+        uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Semantic Release
-        run: npx semantic-release
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          NODE_VERSION: ${{ env.NODE_VERSION }}
+          GO_VERSION: ${{ env.GO_VERSION }}
+          GH_TOKEN: ${{ env.GH_TOKEN }}

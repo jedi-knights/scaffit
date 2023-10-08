@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+      - 'hotfix/*'
+
+env:
+    GO_VERSION: 1.21.2
+    NODE_VERSION: 20
+    NODE_CACHE: 'npm'
+
+jobs:
+  trigger_workflows:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Lint Commit Message
+        uses: jedi-knights/shared-workflows/.github/workflows/commitlint.yml@main
+        with:
+            NODE_VERSION: ${{ env.NODE_VERSION }}
+            NODE_CACHE: ${{ env.NODE_CACHE }}
+
+      - name: Lint
+        uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
+        with:
+            NODE_VERSION: ${{ env.NODE_VERSION }}
+            NODE_CACHE: ${{ env.NODE_CACHE }}
+            GO_VERSION: ${{ env.GO_VERSION }}
+
+      - name: Test
+        uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
+        with:
+          GO_VERSION: ${{ env.GO_VERSION }}
+
+      - name: Trigger Build Workflow
+        uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
+        with:
+          GO_VERSION: ${{ env.GO_VERSION }}
