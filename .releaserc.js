@@ -83,8 +83,9 @@ module.exports = {
             // The Git user associated with the Git credentials has to be able to push commit to the release branch.
             '@semantic-release/git',
             {
-                assets: ['./public/**/*', 'package.json', 'package-lock.json', 'CHANGELOG.md', 'VERSION'],
-                message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+                assets: ['CHANGELOG.md', 'VERSION'],
+                //message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+                message: 'chore(release): ${nextRelease.version} [skip ci]'
             }
         ],
 
