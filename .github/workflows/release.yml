@@ -8,7 +8,8 @@ on:
 env:
   NODE_VERSION: 18
   GO_VERSION: 1.21.2
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+
 
 jobs:
   release:
@@ -29,5 +30,22 @@ jobs:
       - name: Release
         uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
         with:
-          NODE_VERSION: ${{ env.NODE_VERSION }}
-          GO_VERSION: ${{ env.GO_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          go mod tidy
+
+      - name: Semantic Release
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+        run: npx semantic-release
+

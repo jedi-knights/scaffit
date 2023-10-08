@@ -1,95 +1,20 @@
 module.exports = {
-    branches: ['main'],
-    ci: true,
-    debug: true,
-    dryRun: false,
-    tagFormat: '${version}',
-
-    // Global plugin options (will be passed to all plugins)
-    preset: 'conventionalcommits',
-
-    // Reponsible for verifying conditions necessary to proceed with the release
-    verifyConditions: [
-        '@semantic-release/changelog',
-        '@semantic-release/git',
-        '@semantic-release/github'
-    ],
-
-    // Responsible for determining the type of release to make (major, minor or patch)
-    // See: https://github.com/semantic-release/commit-analyzer#configuration
-    analyzeCommits: [
-        '@semantic-release/commit-analyzer'
-    ],
-
-    // Responsible for generating the content of the release note
-    generateNotes: [
-        '@semantic-release/release-notes-generator'
-    ],
-
-    // Responsible for preparing the release, for example creating or updating files such as package.json, CHANGELOG.md, documentation or compiled assets
-    prepare: [
-        '@semantic-release/changelog',
-        '@semantic-release/git'
-    ],
-
-    // Responsible for preparing the release, for example creating or updating files such as package.json, CHANGELOG.md, documentation or compiled assets
-    publish: [
-        '@semantic-release/github'
-    ],
+    branches: ['main'], // Define your default branch name
 
     plugins: [
-        [
-            '@semantic-release/commit-analyzer',
-            {
-                preset: 'conventionalcommits',
-                releaseRules: [
-                    { type: 'docs', release: 'patch' },
-                    { type: 'refactor', release: 'patch' },
-                    { type: 'style', release: 'patch' }
-                ],
-                parserOpts: {
-                    noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING']
-                }
-            }
-        ],
+        '@semantic-release/commit-analyzer', // Analyzes commit messages to determine the next version.
+        '@semantic-release/release-notes-generator', // Generates release notes from commit messages.
+        '@semantic-release/changelog', // Updates a CHANGELOG.md file based on the release notes.
+        '@semantic-release/github', // Publishes releases on GitHub.
+        '@semantic-release/git' // Commits version bump and changelog files.
+    ],
 
-        // for each release, the CHANGELOG.md file will be created or updated.
-        '@semantic-release/release-notes-generator',
-        [
-            '@semantic-release/changelog',
-            {
-                changelogFile: 'CHANGELOG.md'
-            }
-        ],
-        [
-            '@semantic-release/git',
-            {
-                assets: ['CHANGELOG.md']
-            }
-        ],
-
-        '@semantic-release/changelog',
-        [
-            '@semantic-release/exec',
-            {
-                prepareCmd: 'echo ${nextRelease.version} > VERSION'
-            }
-        ],
-
-        ['@semantic-release/git', {
-            assets: ['./public/**/*', 'package.json', 'package-lock.json', 'CHANGELOG.md', 'VERSION'],
-            message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-        }],
-        [
-            // semantic-release plugin to publish a GitHub release and comment on released pull requests/issues.
-            // https://github.com/semantic-release/github
-            '@semantic-release/github',
-            {
-                assets: [
-                    { path: 'CHANGELOG.md', label: 'Changelog' }
-                ]
-            }
-            // GitHub releases will be published with the file CHANGELOG.md
-        ]
+    prepare: [
+        {
+            path: '@semantic-release/exec',
+            cmd: 'make build' // Build your Go application here if needed.
+        }
     ]
+
+    // Customize the release process further if necessary.
 }

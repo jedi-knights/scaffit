@@ -5,7 +5,10 @@ all: lint
 clean:
 	rm -f junit.xml
 
-lint-js:
+fix-js:
+	npx eslint .releaserc.js commitlint.config.js --fix
+
+lint-js: fix-js
 	npx eslint .releaserc.js commitlint.config.js
 
 lint-go:
