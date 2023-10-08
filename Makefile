@@ -2,6 +2,9 @@
 
 all: lint
 
+clean:
+	rm -f junit.xml
+
 lint-js:
 	npx eslint .releaserc.js commitlint.config.js
 
@@ -11,7 +14,7 @@ lint-go:
 lint: lint-js lint-go
 
 test:
-	go test -v ./...
+	ginkgo --junit-report junit.xml ./...
 
 build:
 	go build -o scaffit main.go

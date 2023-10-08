@@ -1,80 +1,20 @@
-package utils_test
+package text_test
 
 import (
-	"github.com/jedi-knights/scaffit/utils"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+
+	"github.com/jedi-knights/scaffit/pkg/text"
 )
 
-var _ = Describe("Utils", func() {
-	Describe("ValidateModulePath", func() {
-		Context("when the input is valid", func() {
-			It("returns nil when given 'github.com/jdoe/myproject", func() {
-				// Arrange
-				modulePath := "github.com/jdoe/myproject"
-
-				// Act
-				err := utils.ValidateModulePath(modulePath)
-
-				// Assert
-				Expect(err).To(BeNil())
-			})
-
-			It("returns nil when given 'github.com/jdoe/my_project", func() {
-				// Arrange
-				modulePath := "github.com/jdoe/my_project"
-
-				// Act
-				err := utils.ValidateModulePath(modulePath)
-
-				// Assert
-				Expect(err).To(BeNil())
-			})
-
-			It("returns nil when given 'github.com/jdoe/myLibrary", func() {
-				// Arrange
-				modulePath := "github.com/jdoe/myLibrary"
-
-				// Act
-				err := utils.ValidateModulePath(modulePath)
-
-				// Assert
-				Expect(err).To(BeNil())
-			})
-		})
-
-		Context("when the input is invalid", func() {
-			It("returns an error when given a string with spaces", func() {
-				// Arrange
-				modulePath := "github.com/jdoe/my project"
-
-				// Act
-				err := utils.ValidateModulePath(modulePath)
-
-				// Assert
-				Expect(err).ToNot(BeNil())
-			})
-
-			It("returns an error when given a string with a hyphen", func() {
-				// Arrange
-				modulePath := "github.com/jdoe/my-project"
-
-				// Act
-				err := utils.ValidateModulePath(modulePath)
-
-				// Assert
-				Expect(err).ToNot(BeNil())
-			})
-		})
-	})
-
+var _ = Describe("Text", func() {
 	Describe("ContainsSpecialCharacters", func() {
 		It("returns true when given a string with a special character", func() {
 			// Arrange
 			part := "my@project"
 
 			// Act
-			result := utils.ContainsSpecialCharacters(part)
+			result := text.ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -85,7 +25,7 @@ var _ = Describe("Utils", func() {
 			part := "myproject"
 
 			// Act
-			result := utils.ContainsSpecialCharacters(part)
+			result := text.ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -96,7 +36,7 @@ var _ = Describe("Utils", func() {
 			part := "my_project"
 
 			// Act
-			result := utils.ContainsSpecialCharacters(part)
+			result := text.ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -109,7 +49,7 @@ var _ = Describe("Utils", func() {
 			part := "myProject"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -120,7 +60,7 @@ var _ = Describe("Utils", func() {
 			part := "my_project"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -131,7 +71,7 @@ var _ = Describe("Utils", func() {
 			part := "my-project"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -142,7 +82,7 @@ var _ = Describe("Utils", func() {
 			part := "my_project"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -153,7 +93,7 @@ var _ = Describe("Utils", func() {
 			part := "my project"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -164,7 +104,7 @@ var _ = Describe("Utils", func() {
 			part := "myProject"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -175,7 +115,7 @@ var _ = Describe("Utils", func() {
 			part := "myProject1"
 
 			// Act
-			result := utils.IsCamelCase(part)
+			result := text.IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -188,7 +128,7 @@ var _ = Describe("Utils", func() {
 			part := "my project"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -199,7 +139,7 @@ var _ = Describe("Utils", func() {
 			part := "my	project"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -210,7 +150,7 @@ var _ = Describe("Utils", func() {
 			part := "my\nproject"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -221,7 +161,7 @@ var _ = Describe("Utils", func() {
 			part := "my\rproject"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -232,7 +172,7 @@ var _ = Describe("Utils", func() {
 			part := "my\fproject"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -243,7 +183,7 @@ var _ = Describe("Utils", func() {
 			part := "my\vproject"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -254,7 +194,7 @@ var _ = Describe("Utils", func() {
 			part := "myproject"
 
 			// Act
-			result := utils.ContainsWhitespace(part)
+			result := text.ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeFalse())

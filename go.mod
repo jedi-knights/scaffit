@@ -19,6 +19,7 @@ require (
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/manifoldco/promptui v0.9.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/ginkgo/v2 v2.12.1 // indirect
 	github.com/onsi/gomega v1.28.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
