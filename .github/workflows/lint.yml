@@ -1,9 +1,10 @@
 name: Lint
 
 on:
-  push:
-    branches:
-      - '**'
+  workflow_run:
+    workflows: ["Main Workflow"]
+    types:
+      - completed
       
 env:
   GO_VERSION: 1.21.2
