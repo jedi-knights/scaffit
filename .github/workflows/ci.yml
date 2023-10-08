@@ -24,4 +24,6 @@ jobs:
 
   build:
     uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
+    with:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
