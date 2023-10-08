@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <testsuites tests="22" disabled="0" errors="0" failures="0" time="0.0012850930000000002">
+      <testsuite name="Golang Suite" package="/Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang" tests="5" disabled="0" skipped="0" errors="0" failures="0" time="0.000494161" timestamp="2023-10-08T19:19:02">
+          <properties>
+              <property name="SuiteSucceeded" value="true"></property>
+              <property name="SuiteHasProgrammaticFocus" value="false"></property>
+              <property name="SpecialSuiteFailureReason" value=""></property>
+              <property name="SuiteLabels" value="[]"></property>
+              <property name="RandomSeed" value="1696807140"></property>
+              <property name="RandomizeAllSpecs" value="false"></property>
+              <property name="LabelFilter" value=""></property>
+              <property name="FocusStrings" value=""></property>
+              <property name="SkipStrings" value=""></property>
+              <property name="FocusFiles" value=""></property>
+              <property name="SkipFiles" value=""></property>
+              <property name="FailOnPending" value="false"></property>
+              <property name="FailFast" value="false"></property>
+              <property name="FlakeAttempts" value="0"></property>
+              <property name="DryRun" value="false"></property>
+              <property name="ParallelTotal" value="1"></property>
+              <property name="OutputInterceptorMode" value=""></property>
+          </properties>
+          <testcase name="[It] Golang ValidateModulePath when the input is valid returns nil when given &#39;github.com/jdoe/myproject" classname="Golang Suite" status="passed" time="0.000167544">
+              <system-err>&gt; Enter [It] returns nil when given &#39;github.com/jdoe/myproject - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:13 @ 10/08/23 19:19:02.936&#xA;&lt; Exit [It] returns nil when given &#39;github.com/jdoe/myproject - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:13 @ 10/08/23 19:19:02.936 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Golang ValidateModulePath when the input is valid returns nil when given &#39;github.com/jdoe/my_project" classname="Golang Suite" status="passed" time="3.4042e-05">
+              <system-err>&gt; Enter [It] returns nil when given &#39;github.com/jdoe/my_project - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:24 @ 10/08/23 19:19:02.936&#xA;&lt; Exit [It] returns nil when given &#39;github.com/jdoe/my_project - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:24 @ 10/08/23 19:19:02.936 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Golang ValidateModulePath when the input is valid returns nil when given &#39;github.com/jdoe/myLibrary" classname="Golang Suite" status="passed" time="4.2857e-05">
+              <system-err>&gt; Enter [It] returns nil when given &#39;github.com/jdoe/myLibrary - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:35 @ 10/08/23 19:19:02.936&#xA;&lt; Exit [It] returns nil when given &#39;github.com/jdoe/myLibrary - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:35 @ 10/08/23 19:19:02.936 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Golang ValidateModulePath when the input is invalid returns an error when given a string with spaces" classname="Golang Suite" status="passed" time="2.9482e-05">
+              <system-err>&gt; Enter [It] returns an error when given a string with spaces - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:48 @ 10/08/23 19:19:02.936&#xA;&lt; Exit [It] returns an error when given a string with spaces - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:48 @ 10/08/23 19:19:02.936 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Golang ValidateModulePath when the input is invalid returns an error when given a string with a hyphen" classname="Golang Suite" status="passed" time="3.8821e-05">
+              <system-err>&gt; Enter [It] returns an error when given a string with a hyphen - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:59 @ 10/08/23 19:19:02.936&#xA;&lt; Exit [It] returns an error when given a string with a hyphen - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/golang/golang_test.go:59 @ 10/08/23 19:19:02.936 (0s)&#xA;</system-err>
+          </testcase>
+      </testsuite>
+      <testsuite name="Text Suite" package="/Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text" tests="17" disabled="0" skipped="0" errors="0" failures="0" time="0.000790932" timestamp="2023-10-08T19:19:03">
+          <properties>
+              <property name="SuiteSucceeded" value="true"></property>
+              <property name="SuiteHasProgrammaticFocus" value="false"></property>
+              <property name="SpecialSuiteFailureReason" value=""></property>
+              <property name="SuiteLabels" value="[]"></property>
+              <property name="RandomSeed" value="1696807140"></property>
+              <property name="RandomizeAllSpecs" value="false"></property>
+              <property name="LabelFilter" value=""></property>
+              <property name="FocusStrings" value=""></property>
+              <property name="SkipStrings" value=""></property>
+              <property name="FocusFiles" value=""></property>
+              <property name="SkipFiles" value=""></property>
+              <property name="FailOnPending" value="false"></property>
+              <property name="FailFast" value="false"></property>
+              <property name="FlakeAttempts" value="0"></property>
+              <property name="DryRun" value="false"></property>
+              <property name="ParallelTotal" value="1"></property>
+              <property name="OutputInterceptorMode" value=""></property>
+          </properties>
+          <testcase name="[It] Text ContainsSpecialCharacters returns true when given a string with a special character" classname="Text Suite" status="passed" time="9.1432e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:12 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:12 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsSpecialCharacters returns false when given a string without a special character" classname="Text Suite" status="passed" time="1.7855e-05">
+              <system-err>&gt; Enter [It] returns false when given a string without a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:23 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string without a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:23 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsSpecialCharacters returns false when given my_project" classname="Text Suite" status="passed" time="1.0275e-05">
+              <system-err>&gt; Enter [It] returns false when given my_project - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:34 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given my_project - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:34 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns true when given a string in camel case" classname="Text Suite" status="passed" time="4.4644e-05">
+              <system-err>&gt; Enter [It] returns true when given a string in camel case - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:47 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string in camel case - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:47 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string not in camel case" classname="Text Suite" status="passed" time="3.7003e-05">
+              <system-err>&gt; Enter [It] returns false when given a string not in camel case - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:58 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string not in camel case - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:58 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string with a hyphen" classname="Text Suite" status="passed" time="2.5223e-05">
+              <system-err>&gt; Enter [It] returns false when given a string with a hyphen - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:69 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string with a hyphen - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:69 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string with a special character" classname="Text Suite" status="passed" time="2.8547e-05">
+              <system-err>&gt; Enter [It] returns false when given a string with a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:80 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string with a special character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:80 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string with a space" classname="Text Suite" status="passed" time="2.5293e-05">
+              <system-err>&gt; Enter [It] returns false when given a string with a space - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:91 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string with a space - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:91 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string with an uppercase letter" classname="Text Suite" status="passed" time="2.9356e-05">
+              <system-err>&gt; Enter [It] returns false when given a string with an uppercase letter - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:102 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string with an uppercase letter - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:102 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text IsCamelCase returns false when given a string with a number" classname="Text Suite" status="passed" time="2.8123e-05">
+              <system-err>&gt; Enter [It] returns false when given a string with a number - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:113 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string with a number - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:113 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a space" classname="Text Suite" status="passed" time="1.4988e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a space - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:126 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a space - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:126 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a tab" classname="Text Suite" status="passed" time="1.5515e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a tab - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:137 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a tab - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:137 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a newline" classname="Text Suite" status="passed" time="1.1089e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a newline - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:148 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a newline - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:148 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a carriage return" classname="Text Suite" status="passed" time="1.2555e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a carriage return - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:159 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a carriage return - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:159 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a form feed" classname="Text Suite" status="passed" time="2.869e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a form feed - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:170 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a form feed - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:170 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns true when given a string with a vertical tab" classname="Text Suite" status="passed" time="1.2895e-05">
+              <system-err>&gt; Enter [It] returns true when given a string with a vertical tab - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:181 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns true when given a string with a vertical tab - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:181 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+          <testcase name="[It] Text ContainsWhitespace returns false when given a string without a whitespace character" classname="Text Suite" status="passed" time="1.7615e-05">
+              <system-err>&gt; Enter [It] returns false when given a string without a whitespace character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:192 @ 10/08/23 19:19:03.468&#xA;&lt; Exit [It] returns false when given a string without a whitespace character - /Users/omarcrosby/go/src/github.com/jedi-knights/scaffit/pkg/text/text_test.go:192 @ 10/08/23 19:19:03.468 (0s)&#xA;</system-err>
+          </testcase>
+      </testsuite>
+  </testsuites>

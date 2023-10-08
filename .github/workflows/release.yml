@@ -1,6 +1,9 @@
 name: Release
 
-on: workflow_dispatch
+on:
+  pull_request:
+    types:
+      - closed
 
 env:
   NODE_VERSION: 18
@@ -24,8 +27,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Release
+        uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'

@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+      - 'hotfix/*'
+
+jobs:
+  trigger_workflows:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+
+  commitlint:
+    uses: jedi-knights/shared-workflows/.github/workflows/commitlint.yml@main
+
+  lint:
+    uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
+
+  test:
+    uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
+
+  build:
+    uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
+    secrets: inherit
+
