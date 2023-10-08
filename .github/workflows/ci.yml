@@ -15,29 +15,25 @@ jobs:
   trigger_workflows:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+  commitlint:
+    uses: jedi-knights/shared-workflows/.github/workflows/commitlint.yml@main
+    with:
+      NODE_VERSION: ${{ env.NODE_VERSION }}
+      NODE_CACHE: ${{ env.NODE_CACHE }}
 
-      - name: Lint Commit Message
-        uses: jedi-knights/shared-workflows/.github/workflows/commitlint.yml@main
-        with:
-            NODE_VERSION: ${{ env.NODE_VERSION }}
-            NODE_CACHE: ${{ env.NODE_CACHE }}
+  lint:
+    uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
+    with:
+      NODE_VERSION: ${{ env.NODE_VERSION }}
+      NODE_CACHE: ${{ env.NODE_CACHE }}
+      GO_VERSION: ${{ env.GO_VERSION }}
 
-      - name: Lint
-        uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
-        with:
-            NODE_VERSION: ${{ env.NODE_VERSION }}
-            NODE_CACHE: ${{ env.NODE_CACHE }}
-            GO_VERSION: ${{ env.GO_VERSION }}
+  test:
+    uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
+    with:
+      GO_VERSION: ${{ env.GO_VERSION }}
 
-      - name: Test
-        uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
-        with:
-          GO_VERSION: ${{ env.GO_VERSION }}
-
-      - name: Trigger Build Workflow
-        uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
-        with:
-          GO_VERSION: ${{ env.GO_VERSION }}
+  build:
+    uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
+    with:
+      GO_VERSION: ${{ env.GO_VERSION }}
