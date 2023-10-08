@@ -9,3 +9,9 @@ lint-go:
 	golangci-lint run ./...
 
 lint: lint-js lint-go
+
+test:
+	go test -v ./...
+
+build:
+	go build -o scaffit main.go

@@ -39,12 +39,16 @@ func (g *ModuleGenerator) generateFiles() error {
 		return err
 	}
 
-	log.Println("Todo: Generate module files")
+	log.Printf("Module path: %s\n", modulePath)
 	return nil
 }
 
 // Generate generates the module structure
 func (g *ModuleGenerator) Generate() error {
+	var (
+		err error
+	)
+
 	log.Printf("Generating module at %s\n", g.location)
 
 	if !fsys.DirectoryExists(g.location) {
@@ -54,6 +58,10 @@ func (g *ModuleGenerator) Generate() error {
 		}
 	} else {
 		log.Printf("Directory %s already exists\n", g.location)
+	}
+
+	if err = g.generateFiles(); err != nil {
+		return err
 	}
 
 	return nil
