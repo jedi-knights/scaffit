@@ -73,3 +73,4 @@ It assumes you have already created the parent command via `cobra add parent` fi
 - [Building and Testing Go with GitHub Acitons](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go)
 - [Control permissions for GITHUB_TOKEN](https://github.blog/changelog/2021-04-20-github-actions-control-permissions-for-github_token/)
 - [Automatic Token Authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
+
