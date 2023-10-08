@@ -11,29 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run a one-line script
-        run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
 
   commitlint:
     uses: jedi-knights/shared-workflows/.github/workflows/commitlint.yml@main
-    with:
-      NODE_VERSION: 20
-      NODE_CACHE: 'npm'
 
   lint:
     uses: jedi-knights/shared-workflows/.github/workflows/lint.yml@main
-    with:
-      NODE_VERSION: 20
-      NODE_CACHE: 'npm'
-      GO_VERSION: 1.21.2
 
   test:
     uses: jedi-knights/shared-workflows/.github/workflows/test.yml@main
-    with:
-      GO_VERSION: 1.21.2
 
   build:
     uses: jedi-knights/shared-workflows/.github/workflows/build.yml@main
-    with:
-      GO_VERSION: 1.21.2
 
