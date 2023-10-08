@@ -1,6 +1,10 @@
 name: Release
 
 on:
+  push:
+    branches:
+      - main
+
   pull_request:
     types:
       - closed
@@ -10,9 +14,8 @@ env:
   GO_VERSION: 1.21.2
   GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
-
 jobs:
-  release:
+  trigger_workflows:
     runs-on: ubuntu-latest
 
     # A new permissions key supported at the workflow and job level enables you
@@ -24,28 +27,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
 
-      - name: Release
-        uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ${{ env.GO_VERSION }}
-          cache: false
-
-      - name: Install Dependencies
-        run: |
-          npm install
-          go mod tidy
-
-      - name: Semantic Release
-        env:
-          GH_TOKEN: ${{ env.GH_TOKEN }}
-        run: npx semantic-release
-
+  release:
+    uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
+    secrets: inherit
