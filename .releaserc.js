@@ -12,7 +12,7 @@ module.exports = {
     prepare: [
         {
             path: '@semantic-release/exec',
-            cmd: 'go build -o my-app' // Build your Go application here if needed.
+            cmd: 'make build' // Build your Go application here if needed.
         }
     ]
 

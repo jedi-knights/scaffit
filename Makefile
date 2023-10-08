@@ -12,3 +12,6 @@ lint-go:
 	golangci-lint run ./...
 
 lint: lint-js lint-go
+
+build:
+	go build -o scaffit main.go
