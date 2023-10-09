@@ -1,20 +1,23 @@
 package generators
 
 import (
-	"github.com/jedi-knights/scaffit/pkg/fsys"
+	"github.com/jedi-knights/scaffit/pkg"
 	"github.com/jedi-knights/scaffit/pkg/golang"
+	"github.com/jedi-knights/scaffit/pkg/node"
 	"github.com/manifoldco/promptui"
 	"log"
 )
 
 // ModuleGenerator generates the module structure
 type ModuleGenerator struct {
+	fsys     pkg.FileSystem
 	location string
 }
 
 // NewModuleGenerator creates a new module generator
-func NewModuleGenerator(location string) *ModuleGenerator {
+func NewModuleGenerator(fsys pkg.FileSystem, location string) *ModuleGenerator {
 	return &ModuleGenerator{
+		fsys:     fsys,
 		location: location,
 	}
 }
@@ -40,6 +43,15 @@ func (g *ModuleGenerator) generateFiles() error {
 	}
 
 	log.Printf("Module path: %s\n", modulePath)
+
+	if err = golang.InitializeGoModule(g.location, modulePath); err != nil {
+		return err
+	}
+
+	if err = node.Init(g.location); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -51,13 +63,13 @@ func (g *ModuleGenerator) Generate() error {
 
 	log.Printf("Generating module at %s\n", g.location)
 
-	if !fsys.DirectoryExists(g.location) {
+	if !g.fsys.DirectoryExists(g.location) {
 		log.Printf("Creating directory %s\n", g.location)
-		if err := fsys.CreateDirectory(g.location); err != nil {
+		if err := g.fsys.CreateDirectory(g.location); err != nil {
 			return err
 		}
 	} else {
-		log.Printf("Directory %s already exists\n", g.location)
+		log.Printf("Directory %s exists\n", g.location)
 	}
 
 	if err = g.generateFiles(); err != nil {

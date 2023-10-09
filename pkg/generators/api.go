@@ -1,17 +1,19 @@
 package generators
 
 import (
-	"github.com/jedi-knights/scaffit/pkg/fsys"
+	"github.com/jedi-knights/scaffit/pkg"
 	"log"
 )
 
 // ApiGenerator generates the api structure
 type ApiGenerator struct {
+	fsys     pkg.FileSystem
 	location string
 }
 
-func NewApiGenerator(location string) *ApiGenerator {
+func NewApiGenerator(fsys pkg.FileSystem, location string) *ApiGenerator {
 	return &ApiGenerator{
+		fsys:     fsys,
 		location: location,
 	}
 }
@@ -34,12 +36,12 @@ func (g *ApiGenerator) Generate() error {
 
 	log.Printf("Generating api at %s\n", g.location)
 
-	if !fsys.DirectoryExists(g.location) {
-		if err = fsys.CreateDirectory(g.location); err != nil {
+	if !g.fsys.DirectoryExists(g.location) {
+		if err = g.fsys.CreateDirectory(g.location); err != nil {
 			return err
 		}
 	} else {
-		log.Printf("Directory %s already exists\n", g.location)
+		log.Printf("Directory %s exists\n", g.location)
 	}
 
 	if err = g.generateFiles(); err != nil {

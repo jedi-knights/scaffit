@@ -1,18 +1,20 @@
 package generators
 
 import (
-	"github.com/jedi-knights/scaffit/pkg/fsys"
+	"github.com/jedi-knights/scaffit/pkg"
 	"log"
 )
 
 // CliGenerator generates the cli structure
 type CliGenerator struct {
+	fsys     pkg.FileSystem
 	location string
 }
 
 // NewCliGenerator creates a new cli generator
-func NewCliGenerator(location string) *CliGenerator {
+func NewCliGenerator(fsys pkg.FileSystem, location string) *CliGenerator {
 	return &CliGenerator{
+		fsys:     fsys,
 		location: location,
 	}
 }
@@ -35,13 +37,13 @@ func (g *CliGenerator) Generate() error {
 
 	log.Printf("Generating cli at %s\n", g.location)
 
-	if !fsys.DirectoryExists(g.location) {
+	if !g.fsys.DirectoryExists(g.location) {
 		log.Printf("Creating directory %s\n", g.location)
-		if err = fsys.CreateDirectory(g.location); err != nil {
+		if err = g.fsys.CreateDirectory(g.location); err != nil {
 			return err
 		}
 	} else {
-		log.Printf("Directory %s already exists\n", g.location)
+		log.Printf("Directory %s exists\n", g.location)
 	}
 
 	if err = g.generateFiles(); err != nil {

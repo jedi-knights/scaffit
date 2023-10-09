@@ -1,4 +1,6 @@
 /*
+Package cmd implements the command line interface for scaffit.
+
 Copyright © 2023 Omar Crosby <omar.crosby@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
