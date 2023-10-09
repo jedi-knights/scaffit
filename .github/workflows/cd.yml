@@ -1,9 +1,9 @@
 name: Release
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - 'main'
 
 env:
   NODE_CACHE: npm
@@ -29,4 +29,10 @@ jobs:
       - name: Semantic Release
         env:
           GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        run: npx semantic-release
+        run: |
+          if npx semantic-release; then
+            echo "Semantic Release successfully created a release."
+          else
+            echo "Semantic Release did not create a release."
+            exit 1 # Exit with a failure code
+          fi          
