@@ -30,13 +30,14 @@ func (g *ModuleGenerator) Location() string {
 
 func (g *ModuleGenerator) generateFiles() error {
 	var (
-		err        error
-		answer     string
-		modulePath string
-		useCobra   bool
-		useViper   bool
-		selectUi   promptui.Select
-		promptUi   promptui.Prompt
+		err           error
+		answer        string
+		modulePath    string
+		useCobra      bool
+		useViper      bool
+		useCommitlint bool
+		selectUi      promptui.Select
+		promptUi      promptui.Prompt
 	)
 
 	promptUi = promptui.Prompt{
@@ -50,7 +51,7 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	selectUi = promptui.Select{
 		Label: "Would you like to use Cobra/Viper?",
-		Items: []string{"Neither", "Cobra Only", "Cobra and Viper"},
+		Items: []string{"Cobra and Viper", "Cobra Only", "Neither"},
 	}
 
 	if _, answer, err = selectUi.Run(); err != nil {
@@ -71,6 +72,17 @@ func (g *ModuleGenerator) generateFiles() error {
 		useCobra = false
 		useViper = false
 	}
+
+	selectUi = promptui.Select{
+		Label: "Would you like to use conventional commits?",
+		Items: []string{"Yes", "No"},
+	}
+
+	if _, answer, err = selectUi.Run(); err != nil {
+		return err
+	}
+
+	useCommitlint = answer == "Yes"
 
 	log.Printf("Module path: %s\n", modulePath)
 
@@ -109,6 +121,15 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	if err = node.Init(localModulePath); err != nil {
 		return err
+	}
+
+	if useCommitlint {
+		log.Printf("Using conventional commits\n")
+		if err = node.InitializeCommitlint(localModulePath); err != nil {
+			return err
+		}
+	} else {
+		log.Printf("Not using conventional commits\n")
 	}
 
 	// Download a markdown file

@@ -15,9 +15,6 @@ func Init(location string) error {
 	if err = InstallDependencies(location); err != nil {
 		return err
 	}
-	if err = InitializeCommitlint(location); err != nil {
-		return err
-	}
 
 	return nil
 }
