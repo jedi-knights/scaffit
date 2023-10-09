@@ -2,9 +2,10 @@ package golang
 
 import (
 	"fmt"
+	"github.com/jedi-knights/scaffit/pkg"
 	"github.com/jedi-knights/scaffit/pkg/text"
-	"os"
-	"os/exec"
+	"log"
+	"path/filepath"
 	"strings"
 )
 
@@ -36,19 +37,75 @@ func ValidateModulePath(input string) error {
 }
 
 func InitializeGoModule(location, modulePath string) error {
-	// Command and arguments to run "go mod init" with the specified module path
-	cmd := exec.Command("go", "mod", "init", modulePath)
+	var (
+		err error
+	)
 
-	// Set the working directory for the command (optional)
-	cmd.Dir = location
+	if err = pkg.RunCommand(location, "go mod init "+modulePath, false); err != nil {
+		return err
+	}
+	if err = InstallDependencies(location); err != nil {
+		return err
+	}
 
-	// Redirect command output to the standard streams
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	// Download the .gitignore file
+	uri := "https://raw.githubusercontent.com/github/gitignore/master/Go.gitignore"
+	gitIgnorePath := filepath.Join(location, ".gitignore")
+	if err = pkg.DownloadFile(uri, gitIgnorePath); err != nil {
+		return err
+	}
 
-	// Run the command
-	err := cmd.Run()
-	if err != nil {
+	return nil
+}
+
+func InstallDependency(location string, dependency string) error {
+	if err := pkg.RunCommand(location, "go get "+dependency, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func InstallDependencies(location string) error {
+	dependencies := []string{
+		"github.com/onsi/ginkgo/v2",
+		"github.com/onsi/gomega",
+	}
+
+	for _, dependency := range dependencies {
+		if err := InstallDependency(location, dependency); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func InitializeCobra(location string, useViper bool) error {
+	var (
+		err     error
+		command string
+	)
+
+	// Install Cobra
+	if err = InstallDependency(location, "github.com/spf13/cobra"); err != nil {
+		return err
+	}
+
+	if useViper {
+		log.Print("Using Viper\n")
+		// Install Viper
+		if err = InstallDependency(location, "github.com/spf13/viper"); err != nil {
+			return err
+		}
+
+		command = "cobra-cli init --viper"
+	} else {
+		log.Print("Not using Viper\n")
+		command = "cobra-cli init"
+	}
+
+	if err = pkg.RunCommand(location, command, false); err != nil {
 		return err
 	}
 

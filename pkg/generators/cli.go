@@ -39,7 +39,7 @@ func (g *CliGenerator) Generate() error {
 
 	if !g.fsys.DirectoryExists(g.location) {
 		log.Printf("Creating directory %s\n", g.location)
-		if err = g.fsys.CreateDirectory(g.location); err != nil {
+		if err = g.fsys.CreateDirectory(g.location, false); err != nil {
 			return err
 		}
 	} else {

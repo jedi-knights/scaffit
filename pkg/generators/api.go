@@ -37,7 +37,7 @@ func (g *ApiGenerator) Generate() error {
 	log.Printf("Generating api at %s\n", g.location)
 
 	if !g.fsys.DirectoryExists(g.location) {
-		if err = g.fsys.CreateDirectory(g.location); err != nil {
+		if err = g.fsys.CreateDirectory(g.location, false); err != nil {
 			return err
 		}
 	} else {

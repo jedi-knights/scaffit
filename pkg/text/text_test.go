@@ -110,7 +110,7 @@ var _ = Describe("Text", func() {
 			Expect(result).To(BeTrue())
 		})
 
-		It("returns false when given a string with a number", func() {
+		It("returns true when given a camel cased string with a number", func() {
 			// Arrange
 			part := "myProject1"
 
@@ -118,7 +118,18 @@ var _ = Describe("Text", func() {
 			result := text.IsCamelCase(part)
 
 			// Assert
-			Expect(result).To(BeFalse())
+			Expect(result).To(BeTrue())
+		})
+
+		It("returns true when given 'project1'", func() {
+			// Arrange
+			part := "project1"
+
+			// Act
+			result := text.IsCamelCase(part)
+
+			// Assert
+			Expect(result).To(BeTrue())
 		})
 	})
 
