@@ -3,6 +3,7 @@ package pkg
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -14,7 +15,11 @@ func ReadVersion() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		if err = file.Close(); err != nil {
+			log.Print(err)
+		}
+	}(file)
 
 	scanner := bufio.NewScanner(file)
 	if scanner.Scan() {

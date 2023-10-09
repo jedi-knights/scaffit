@@ -1,4 +1,6 @@
 /*
+Package cmd implements the command line interface for scaffit.
+
 Copyright © 2023 Omar Crosby <omar.crosby@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,6 +24,7 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"github.com/jedi-knights/scaffit/pkg"
 	"github.com/jedi-knights/scaffit/pkg/generators"
 	"log"
 
@@ -43,7 +46,9 @@ var cliCmd = &cobra.Command{
 			log.Fatalf("Error reading location: %v\n", err)
 		}
 
-		if err = generators.NewCliGenerator(location).Generate(); err != nil {
+		fsys := pkg.NewFileSystem()
+
+		if err = generators.NewCliGenerator(*fsys, location).Generate(); err != nil {
 			log.Fatalf("Error generating cli: %v\n", err)
 		}
 

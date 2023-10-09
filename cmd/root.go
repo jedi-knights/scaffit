@@ -1,4 +1,6 @@
 /*
+Package cmd implements the command line interface for scaffit.
+
 Copyright © 2023 Omar Crosby <omar.crosby@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -89,6 +91,6 @@ func initConfig() {
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
-		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+		_, _ = fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
 }

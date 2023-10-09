@@ -20,15 +20,15 @@ func ValidateModulePath(input string) error {
 	// Check each part individually
 	for _, part := range parts {
 		if text.ContainsSpecialCharacters(part) {
-			return fmt.Errorf("Module path part contains special characters: %s", part)
+			return fmt.Errorf("module path part contains special characters: %s", part)
 		}
 
 		if text.ContainsWhitespace(part) {
-			return fmt.Errorf("Module path part contains whitespace characters: %s", part)
+			return fmt.Errorf("module path part contains whitespace characters: %s", part)
 		}
 
 		if !strings.Contains(part, ".") && !strings.Contains(part, "_") && !text.IsCamelCase(part) {
-			return fmt.Errorf("Module path part is not in camel case: %s", part)
+			return fmt.Errorf("module path part is not in camel case: %s", part)
 		}
 	}
 

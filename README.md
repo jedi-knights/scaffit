@@ -12,7 +12,7 @@ A Go utility to consistently scaffold Go projects.
 
 Scaffit is an interactive Go utility providing users with a consistent way to scaffold Go projects.
 
-It is intended to be suitable for use creating a variety of types of projects.  Due to it's interactive nature it
+It is intended to be suitable for use creating a variety of types of projects.  Due to its interactive nature it
 should provide flexibility in the types of projects it can create.
 
 
@@ -33,8 +33,8 @@ of ~/go/src/github.com/<username>/<project-name>
 
 this assumes your module path was github.com/<username>/<project-name>
 
-So for example if you are creating a new project file that is supposed to go to your github repo (assuming your
-github username is jdoe) 
+So for example if you are creating a new project file that is supposed to go to your GitHub repo (assuming your
+GitHub username is jdoe) 
 
 > scaffit new --module-path=github.com/jdoe/myproject
 
@@ -71,7 +71,8 @@ It assumes you have already created the parent command via `cobra add parent` fi
 - [Using Semantic-Release with GitHub Actions](https://levelup.gitconnected.com/using-semantic-release-with-github-actions-c30d197829f1)
 - [Semantic Release Configuration](https://semantic-release.gitbook.io/semantic-release/usage/configuration)
 - [How to Use Cobra and Viper to Create Your First Golang CLI Tool](https://betterprogramming.pub/step-by-step-using-cobra-and-viper-to-create-your-first-golang-cli-tool-8050d7675093)
-- [Building and Testing Go with GitHub Acitons](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go)
+- [Building and Testing Go with GitHub Actions](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go)
 - [Control permissions for GITHUB_TOKEN](https://github.blog/changelog/2021-04-20-github-actions-control-permissions-for-github_token/)
 - [Automatic Token Authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 - [Permissions for the GitHub Token](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)
+- [How to Upgrade GoLang Dependencies](https://golang.cafe/blog/how-to-upgrade-golang-dependencies.html)
