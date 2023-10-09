@@ -29,10 +29,4 @@ jobs:
       - name: Semantic Release
         env:
           GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        run: |
-          if npx semantic-release; then
-            echo "Semantic Release successfully created a release."
-          else
-            echo "Semantic Release did not create a release."
-            exit 1 # Exit with a failure code
-          fi          
+        run: npx semantic-release
