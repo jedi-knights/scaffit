@@ -11,7 +11,7 @@ type FileSystemer interface {
 	FileExists(path string) bool
 	DirectoryExists(path string) bool
 	CreateFile(path string) (*os.File, error)
-	CreateDirectory(path string) error
+	CreateDirectory(path string, includeGitKeep bool) error
 	DeleteFile(path string) error
 	DeleteDirectory(path string) error
 }
@@ -75,13 +75,20 @@ func (fs FileSystem) CreateFile(path string) (*os.File, error) {
 // CreateDirectory creates a directory
 //
 // uses os.MkdirAll to create the directory and its parent directories if they don't exist
-func (fs FileSystem) CreateDirectory(path string) error {
+func (fs FileSystem) CreateDirectory(path string, includeGitKeep bool) error {
 	var (
 		err error
 	)
 
 	if err = os.MkdirAll(path, os.ModePerm); err != nil {
 		return err
+	}
+
+	if includeGitKeep {
+		gitKeepPath := fmt.Sprintf("%s/.gitkeep", path)
+		if _, err = fs.CreateFile(gitKeepPath); err != nil {
+			return err
+		}
 	}
 
 	return nil

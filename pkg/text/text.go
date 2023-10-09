@@ -22,7 +22,7 @@ func ContainsSpecialCharacters(part string) bool {
 func IsCamelCase(part string) bool {
 	// Regular expression pattern to check if a string is in camel case
 	// The pattern checks for lowercase letters followed by uppercase letters.
-	pattern := "^[a-z]+(?:[A-Z][a-z]*)*$"
+	pattern := "^[a-z]+(?:[a-zA-Z0-9])*$"
 	return regexp.MustCompile(pattern).MatchString(part)
 }
 
