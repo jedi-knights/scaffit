@@ -11,11 +11,6 @@ on:
     types:
       - closed
 
-env:
-  NODE_VERSION: 18
-  GO_VERSION: 1.21.2
-  GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-
 jobs:
   trigger_workflows:
     runs-on: ubuntu-latest
@@ -33,4 +28,7 @@ jobs:
 
   release:
     uses: jedi-knights/shared-workflows/.github/workflows/release.yml@main
-    secrets: inherit
+    with:
+      NODE_VERSION: 20
+      GO_VERSION: 1.21.2
+      GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
