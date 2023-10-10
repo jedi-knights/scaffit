@@ -14,6 +14,16 @@ It is intended to be suitable for use creating a variety of types of projects.  
 should provide flexibility in the types of projects it can create.
 
 
+## What does it take to make a module go gettable?
+
+While working on this I started thinking intently about what it takes to make a module go gettable.
+
+I would like Scaffit to always create modules and CLI packages that are go gettable. That being said
+I am going back to do some more research on that topic.  I will update this readme with what I find.
+
+
+> Do Go workspaces have any impact on how projects should be created?
+
 ## Usage
 
 Creating a new project
@@ -74,3 +84,6 @@ It assumes you have already created the parent command via `cobra add parent` fi
 - [Automatic Token Authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 - [Permissions for the GitHub Token](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)
 - [How to Upgrade GoLang Dependencies](https://golang.cafe/blog/how-to-upgrade-golang-dependencies.html)
+- [Learn Go with tests](https://quii.gitbook.io/learn-go-with-tests/)
+- [Golang's Mocking Techniques](https://www.youtube.com/watch?v=LEnXBueFBzk&t=1401s)
+- [Generics in Go](https://www.youtube.com/watch?v=F8Gl8-3ZW0E)

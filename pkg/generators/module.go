@@ -2,8 +2,6 @@ package generators
 
 import (
 	"github.com/jedi-knights/scaffit/pkg"
-	"github.com/jedi-knights/scaffit/pkg/golang"
-	"github.com/jedi-knights/scaffit/pkg/node"
 	"github.com/manifoldco/promptui"
 	"log"
 	"path/filepath"
@@ -30,19 +28,20 @@ func (g *ModuleGenerator) Location() string {
 
 func (g *ModuleGenerator) generateFiles() error {
 	var (
-		err           error
-		answer        string
-		modulePath    string
-		useCobra      bool
-		useViper      bool
-		useCommitlint bool
-		selectUi      promptui.Select
-		promptUi      promptui.Prompt
+		err        error
+		answer     string
+		modulePath string
+		selectUi   promptui.Select
+		promptUi   promptui.Prompt
+		useFlags   map[string]bool
+		commands   []*pkg.Command
 	)
+
+	useFlags = make(map[string]bool)
 
 	promptUi = promptui.Prompt{
 		Label:    "Module path",
-		Validate: golang.ValidateModulePath,
+		Validate: pkg.ValidateModulePath,
 	}
 
 	if modulePath, err = promptUi.Run(); err != nil {
@@ -60,29 +59,45 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	switch answer {
 	case "Cobra Only":
-		useCobra = true
-		useViper = false
+		useFlags["cobra"] = true
+		useFlags["viper"] = false
 	case "Cobra and Viper":
-		useCobra = true
-		useViper = true
+		useFlags["cobra"] = true
+		useFlags["viper"] = true
 	case "Neither":
-		useCobra = false
-		useViper = false
+		useFlags["cobra"] = false
+		useFlags["viper"] = false
 	default:
-		useCobra = false
-		useViper = false
+		useFlags["cobra"] = false
+		useFlags["viper"] = false
 	}
 
 	selectUi = promptui.Select{
 		Label: "Would you like to use conventional commits?",
 		Items: []string{"Yes", "No"},
 	}
-
 	if _, answer, err = selectUi.Run(); err != nil {
 		return err
 	}
+	useFlags["commitlint"] = answer == "Yes"
 
-	useCommitlint = answer == "Yes"
+	selectUi = promptui.Select{
+		Label: "Would you like to use semantic release?",
+		Items: []string{"Yes", "No"},
+	}
+	if _, answer, err = selectUi.Run(); err != nil {
+		return err
+	}
+	useFlags["semantic-release"] = answer == "Yes"
+
+	selectUi = promptui.Select{
+		Label: "Would you like to use eslint?",
+		Items: []string{"Yes", "No"},
+	}
+	if _, answer, err = selectUi.Run(); err != nil {
+		return err
+	}
+	useFlags["eslint"] = answer == "Yes"
 
 	log.Printf("Module path: %s\n", modulePath)
 
@@ -91,70 +106,24 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	log.Printf("Local module path: %s\n", localModulePath)
 
-	// Create the local module path
-	if err = g.fsys.CreateDirectory(localModulePath, false); err != nil {
-		return err
-	}
+	commands = append(commands, pkg.NewCommand(g.location, "mkdir -p "+modulePath))
+	commands = append(commands, pkg.NewGit().Commands(localModulePath)...)
+	commands = append(commands, pkg.NewNode(useFlags).Commands(localModulePath)...)
+	commands = append(commands, pkg.NewGolang(useFlags).Commands(localModulePath, modulePath)...)
 
-	// Initialize the Git repository
-	if err = pkg.RunCommand(localModulePath, "git init .", false); err != nil {
-		return err
-	}
+	commands = append(commands, pkg.NewCommand(localModulePath, "curl -o README.md https://raw.githubusercontent.com/Ismaestro/markdown-template/master/README.md"))
 
-	if err = golang.InitializeGoModule(localModulePath, modulePath); err != nil {
-		return err
-	}
+	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir pkg"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package pkg' > pkg/pkg.go"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir utils"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package utils' > utils/utils.go"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir assets"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "touch assets/.gitkeep"))
 
-	if useCobra {
-		// Using Cobra
-		log.Printf("Using Cobra\n")
-		if err = golang.InitializeCobra(localModulePath, useViper); err != nil {
+	for _, command := range commands {
+		if err = command.Execute(false); err != nil {
 			return err
 		}
-	} else {
-		// Not using Cobra
-		log.Printf("Not using Cobra\n")
-		if useViper {
-			log.Fatal("Cannot use Viper without Cobra at this time.")
-		}
-	}
-
-	if err = node.Init(localModulePath); err != nil {
-		return err
-	}
-
-	if useCommitlint {
-		log.Printf("Using conventional commits\n")
-		if err = node.InitializeCommitlint(localModulePath); err != nil {
-			return err
-		}
-	} else {
-		log.Printf("Not using conventional commits\n")
-	}
-
-	// Download a markdown file
-	uri := "https://raw.githubusercontent.com/Ismaestro/markdown-template/master/README.md"
-	readmePath := filepath.Join(localModulePath, "README.md")
-	if err = pkg.DownloadFile(uri, readmePath); err != nil {
-		return err
-	}
-
-	// Create pkg directory
-	pkgPath := filepath.Join(localModulePath, "pkg")
-	if err = g.fsys.CreateDirectory(pkgPath, true); err != nil {
-		return err
-	}
-
-	// Create utils directory
-	utilsPath := filepath.Join(localModulePath, "utils")
-	if err = g.fsys.CreateDirectory(utilsPath, true); err != nil {
-		return err
-	}
-
-	// Create an assets directory
-	assetsPath := filepath.Join(localModulePath, "assets")
-	if err = g.fsys.CreateDirectory(assetsPath, true); err != nil {
-		return err
 	}
 
 	return nil

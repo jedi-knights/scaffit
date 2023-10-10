@@ -1,4 +1,4 @@
-package text_test
+package pkg_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestText(t *testing.T) {
+func TestPkg(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Text Suite")
+	RunSpecs(t, "Pkg Suite")
 }

@@ -1,10 +1,9 @@
-package golang_test
+package pkg_test
 
 import (
+	"github.com/jedi-knights/scaffit/pkg"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-
-	"github.com/jedi-knights/scaffit/pkg/golang"
 )
 
 var _ = Describe("Golang", func() {
@@ -15,7 +14,7 @@ var _ = Describe("Golang", func() {
 				modulePath := "github.com/jdoe/myproject"
 
 				// Act
-				err := golang.ValidateModulePath(modulePath)
+				err := pkg.ValidateModulePath(modulePath)
 
 				// Assert
 				Expect(err).To(BeNil())
@@ -26,7 +25,7 @@ var _ = Describe("Golang", func() {
 				modulePath := "github.com/jdoe/my_project"
 
 				// Act
-				err := golang.ValidateModulePath(modulePath)
+				err := pkg.ValidateModulePath(modulePath)
 
 				// Assert
 				Expect(err).To(BeNil())
@@ -37,7 +36,7 @@ var _ = Describe("Golang", func() {
 				modulePath := "github.com/jdoe/myLibrary"
 
 				// Act
-				err := golang.ValidateModulePath(modulePath)
+				err := pkg.ValidateModulePath(modulePath)
 
 				// Assert
 				Expect(err).To(BeNil())
@@ -50,7 +49,7 @@ var _ = Describe("Golang", func() {
 				modulePath := "github.com/jdoe/my project"
 
 				// Act
-				err := golang.ValidateModulePath(modulePath)
+				err := pkg.ValidateModulePath(modulePath)
 
 				// Assert
 				Expect(err).ToNot(BeNil())
@@ -61,7 +60,7 @@ var _ = Describe("Golang", func() {
 				modulePath := "github.com/jdoe/my-project"
 
 				// Act
-				err := golang.ValidateModulePath(modulePath)
+				err := pkg.ValidateModulePath(modulePath)
 
 				// Assert
 				Expect(err).ToNot(BeNil())
