@@ -1,10 +1,9 @@
-package text_test
+package pkg_test
 
 import (
+	. "github.com/jedi-knights/scaffit/pkg"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-
-	"github.com/jedi-knights/scaffit/pkg/text"
 )
 
 var _ = Describe("Text", func() {
@@ -14,7 +13,7 @@ var _ = Describe("Text", func() {
 			part := "my@project"
 
 			// Act
-			result := text.ContainsSpecialCharacters(part)
+			result := ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -25,7 +24,7 @@ var _ = Describe("Text", func() {
 			part := "myproject"
 
 			// Act
-			result := text.ContainsSpecialCharacters(part)
+			result := ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -36,7 +35,7 @@ var _ = Describe("Text", func() {
 			part := "my_project"
 
 			// Act
-			result := text.ContainsSpecialCharacters(part)
+			result := ContainsSpecialCharacters(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -49,7 +48,7 @@ var _ = Describe("Text", func() {
 			part := "myProject"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -60,7 +59,7 @@ var _ = Describe("Text", func() {
 			part := "my_project"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -71,7 +70,7 @@ var _ = Describe("Text", func() {
 			part := "my-project"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -82,7 +81,7 @@ var _ = Describe("Text", func() {
 			part := "my_project"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -93,7 +92,7 @@ var _ = Describe("Text", func() {
 			part := "my project"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeFalse())
@@ -104,7 +103,7 @@ var _ = Describe("Text", func() {
 			part := "myProject"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -115,7 +114,7 @@ var _ = Describe("Text", func() {
 			part := "myProject1"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -126,7 +125,7 @@ var _ = Describe("Text", func() {
 			part := "project1"
 
 			// Act
-			result := text.IsCamelCase(part)
+			result := IsCamelCase(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -139,7 +138,7 @@ var _ = Describe("Text", func() {
 			part := "my project"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -150,7 +149,7 @@ var _ = Describe("Text", func() {
 			part := "my	project"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -161,7 +160,7 @@ var _ = Describe("Text", func() {
 			part := "my\nproject"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -172,7 +171,7 @@ var _ = Describe("Text", func() {
 			part := "my\rproject"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -183,7 +182,7 @@ var _ = Describe("Text", func() {
 			part := "my\fproject"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -194,7 +193,7 @@ var _ = Describe("Text", func() {
 			part := "my\vproject"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeTrue())
@@ -205,7 +204,7 @@ var _ = Describe("Text", func() {
 			part := "myproject"
 
 			// Act
-			result := text.ContainsWhitespace(part)
+			result := ContainsWhitespace(part)
 
 			// Assert
 			Expect(result).To(BeFalse())

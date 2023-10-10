@@ -1,4 +1,4 @@
-package text
+package pkg
 
 import (
 	"regexp"
