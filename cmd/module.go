@@ -27,6 +27,7 @@ import (
 	"github.com/jedi-knights/scaffit/pkg"
 	"github.com/jedi-knights/scaffit/pkg/generators"
 	"log"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 )
@@ -46,13 +47,17 @@ var moduleCmd = &cobra.Command{
 			log.Fatalf("Error reading location: %v\n", err)
 		}
 
+		if location, err = filepath.Abs(location); err != nil {
+			log.Fatalf("Error resolving absolute path: %v", err)
+		}
+
+		log.Printf("location: %s\n", location)
+
 		fsys := pkg.NewFileSystem()
 
 		if err = generators.NewModuleGenerator(*fsys, location).Generate(); err != nil {
 			log.Fatalf("Error generating module: %v\n", err)
 		}
-
-		log.Printf("location: %s\n", location)
 	},
 }
 

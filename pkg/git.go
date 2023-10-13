@@ -1,20 +1,31 @@
 package pkg
 
+import "path/filepath"
+
 type Giter interface {
 	Commands(location string) []*Command
 }
 
-type Git struct{}
+type Git struct {
+	fsys FileSystemer
+}
 
-func NewGit() *Git {
-	return &Git{}
+func NewGit(fsys FileSystemer) *Git {
+	return &Git{
+		fsys: fsys,
+	}
 }
 
 func (g Git) Commands(location string) []*Command {
 	var commands []*Command
 
-	// Initialize the Git project
-	commands = append(commands, NewCommand(location, "git init ."))
+	gitPath := filepath.Join(location, ".git")
+
+	if !g.fsys.DirectoryExists(gitPath) {
+		// The .git directory doesn't exist.
+		// Initialize the Git project
+		commands = append(commands, NewCommand(location, "git init ."))
+	}
 
 	return commands
 }

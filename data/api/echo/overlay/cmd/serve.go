@@ -1,12 +1,9 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
-    "net/http"
+	"net/http"
 
-    "github.com/spf13/cobra"
+	"github.com/spf13/cobra"
 )
 
 // serveCmd represents the serve command

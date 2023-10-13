@@ -144,7 +144,7 @@ func (g *ApiGenerator) generateFiles() error {
 	log.Printf("Local module path: %s\n", localModulePath)
 
 	commands = append(commands, pkg.NewCommand(g.location, "mkdir -p "+modulePath))
-	commands = append(commands, pkg.NewGit().Commands(localModulePath)...)
+	commands = append(commands, pkg.NewGit(g.fsys).Commands(localModulePath)...)
 	commands = append(commands, pkg.NewNode(useFlags).Commands(localModulePath)...)
 	commands = append(commands, pkg.NewGolang(useFlags).Commands(localModulePath, modulePath)...)
 

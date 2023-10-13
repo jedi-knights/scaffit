@@ -150,6 +150,10 @@ func (fs FileSystem) DeleteDirectory(path string) error {
 
 func CopyFilesWithOverwrite(overlayDir, destinationDir string) error {
 	return filepath.Walk(overlayDir, func(path string, info os.FileInfo, err error) error {
+		var (
+			srcFile, destFile *os.File
+		)
+
 		if err != nil {
 			return err
 		}
@@ -159,25 +163,25 @@ func CopyFilesWithOverwrite(overlayDir, destinationDir string) error {
 
 		// If it's a directory, create it in the destination
 		if info.IsDir() {
+			log.Printf("Creating directory '%s' ...", destPath)
 			return os.MkdirAll(destPath, info.Mode())
 		}
 
 		// If it's a file, copy it to the destination, overwriting if it exists
 		if !info.IsDir() {
-			srcFile, err := os.Open(path)
-			if err != nil {
+			log.Printf("Creating file '%s' ...", destPath)
+
+			if srcFile, err = os.Open(path); err != nil {
 				return err
 			}
 			defer srcFile.Close()
 
-			destFile, err := os.Create(destPath)
-			if err != nil {
+			if destFile, err = os.Create(destPath); err != nil {
 				return err
 			}
 			defer destFile.Close()
 
-			_, err = io.Copy(destFile, srcFile)
-			if err != nil {
+			if _, err = io.Copy(destFile, srcFile); err != nil {
 				return err
 			}
 		}

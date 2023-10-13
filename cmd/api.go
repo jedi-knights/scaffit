@@ -28,6 +28,7 @@ import (
 	"github.com/jedi-knights/scaffit/pkg/generators"
 	"github.com/spf13/cobra"
 	"log"
+	"path/filepath"
 )
 
 // apiCmd represents the api command
@@ -45,13 +46,17 @@ var apiCmd = &cobra.Command{
 			log.Fatalf("Error reading location: %v\n", err)
 		}
 
+		if location, err = filepath.Abs(location); err != nil {
+			log.Fatalf("Error resolving absolute path: %v", err)
+		}
+
+		log.Printf("location: %s\n", location)
+
 		fsys := pkg.NewFileSystem()
 
 		if err = generators.NewApiGenerator(*fsys, location).Generate(); err != nil {
 			log.Fatalf("Error generating api: %v\n", err)
 		}
-
-		log.Printf("location: %s\n", location)
 	},
 }
 
