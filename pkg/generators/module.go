@@ -118,6 +118,8 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir pkg"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package pkg' > pkg/pkg.go"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir internal"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package internal' > internal/internal.go"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir utils"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package utils' > utils/utils.go"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir assets"))
