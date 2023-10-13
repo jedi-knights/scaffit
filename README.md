@@ -91,3 +91,6 @@ It assumes you have already created the parent command via `cobra add parent` fi
 - [Golang's Mocking Techniques](https://www.youtube.com/watch?v=LEnXBueFBzk&t=1401s)
 - [Generics in Go](https://www.youtube.com/watch?v=F8Gl8-3ZW0E)
 - [How to structure New Projects in Golang](https://www.youtube.com/watch?v=dJIUxvfSg6A)
+- [Accept Interfaces and Return Structs](https://subscription.packtpub.com/book/programming/9781838647940/7/ch07lvl1sec45/accepting-interfaces-and-returning-structs#:~:text=There%20is%20a%20Go%20proverb,be%20structs%20or%20concrete%20types.)
+- [Variables in Makefiles](http://aggregate.org/rfisher/Tutorials/Make/make5.html#:~:text=Variables%20in%20a%20makefile%20work,is%20replaced%20by%20the%20string.)
+- [50 Shades of Go](http://golang50shad.es/)
