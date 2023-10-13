@@ -1,5 +1,8 @@
 all: lint test build
 
+ORGANIZATION=jedinights
+REPOSITORY=ecnl-api
+
 clean:
 	rm -f ecnl
 	rm -f junit.xml
@@ -30,17 +33,17 @@ lint:
 	golangci-lint run ./...
 
 run: swagger
-	go run main.go api
+	go run main.go serve
 
 docker-build:
-	docker build -t ecnl-api .
+	docker build -t ${REPOSITORY} .
 
 docker-tag:
-	docker tag ecnl-api jediknights/ecnl-api:latest
+	docker tag ecnl-api ${ORGANIZATION}/${REPOSITORY}:latest
 	#docker tag ecnl-api jediknights/ecnl-api:$(date +%s)
 
 docker-push:
-	docker push --all-tags jediknights/ecnl-api
+	docker push --all-tags ${ORGANIZATION}/${REPOSITORY}
 
 docker-mongo:
 	docker run -it --rm --name mongodb -v ~/mongo/data:/data/db -p 27017:27017 mongo:latest

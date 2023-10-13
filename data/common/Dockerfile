@@ -6,7 +6,7 @@ LABEL stage=build
 WORKDIR /app
 
 # Copy the local package files to the container's workspace
-COPY . .
+COPY ../api/echo/overlay .
 
 RUN make build
 
@@ -25,4 +25,4 @@ USER nonroot:nonroot
 EXPOSE 8080
 
 # Define the command to run your application
-ENTRYPOINT ["./ecnl", "api"]
+ENTRYPOINT ["./APPNAME", "api"]

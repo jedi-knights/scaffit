@@ -116,6 +116,8 @@ func (g *ModuleGenerator) generateFiles() error {
 
 	commands = append(commands, pkg.NewCommand(localModulePath, "curl -o README.md https://raw.githubusercontent.com/Ismaestro/markdown-template/master/README.md"))
 
+	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir data"))
+	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package data' > data/data.go"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir pkg"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "echo 'package pkg' > pkg/pkg.go"))
 	commands = append(commands, pkg.NewCommand(localModulePath, "mkdir internal"))
@@ -133,10 +135,20 @@ func (g *ModuleGenerator) generateFiles() error {
 	}
 
 	// Overlay the files from data/api/echo/overlay into the location
-	log.Println("Copying overlay files ...")
-	if err = pkg.CopyFilesWithOverwrite("data/module/overlay", localModulePath); err != nil {
-		return err
-	}
+	//log.Println("Copying overlay files ...")
+	//if err = pkg.CopyFilesWithOverwrite("data/module/overlay", localModulePath); err != nil {
+	//	return err
+	//}
+	//if err = pkg.CopyFilesWithOverwrite("data/common", localModulePath); err != nil {
+	//	return err
+	//}
+
+	// Here we need something more surgical than a simple overlay.
+
+	// Remember the end goal is to have a project that the user can simply run and have a functional API out of the box.
+	// without any required changes to make it work.  If this isn't the case the whole point is lost.
+
+	// Note: A simple module package has no need for a Dockerfile or the .dockerignore file.
 
 	return nil
 }

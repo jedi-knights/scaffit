@@ -187,7 +187,7 @@ func (g *ApiGenerator) generateGinApi(location string, useFlags map[string]bool)
 
 // generateEchoApi generates the echo api
 func (g *ApiGenerator) generateEchoApi(location string, useFlags map[string]bool) error {
-	log.Println("Generating echo api ...")
+	log.Println("Generating Echo api ...")
 
 	commands := []*pkg.Command{}
 
@@ -246,10 +246,24 @@ func (g *ApiGenerator) generateEchoApi(location string, useFlags map[string]bool
 	}
 
 	// Overlay the files from data/api/echo/overlay into the location
-	log.Println("Copying overlay files ...")
-	if err := pkg.CopyFilesWithOverwrite("data/api/echo/overlay", location); err != nil {
-		return err
-	}
+	//log.Println("Copying overlay files ...")
+	//if err := pkg.CopyFilesWithOverwrite("data/api/echo/overlay", location); err != nil {
+	//	return err
+	//}
+
+	// Here we need something more surgical than a simple overlay.
+
+	// Here we need to replace some strings in the generated files like the organization and repository in the Dockerfile.
+
+	// Remember the end goal is to have a project that the user can simply run and have a functional API out of the box.
+	// without any required changes to make it work.  If this isn't the case the whole point is lost.
+
+	// Here we need to add a Dockerfile.
+	// Here we need to add a .dockerignore file.
+	// Here we need to add a docker-compose.yaml file.
+	// These files need to be intelligently generated with the values inline with publishing to Artifactory or DockerHub.
+	// More research needs to be done here.  We also may need to ask the user some questions about where the images
+	// will be deployed???
 
 	return nil
 }

@@ -1,26 +1,26 @@
 package cmd
 
 import (
-	"net/http"
-
-	"github.com/spf13/cobra"
+    "net/http"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/gommon/log"
+    "github.com/spf13/cobra"
+    echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Run your Echo API",
+	Long:  `Run your Echo API`,
 	Run: func(cmd *cobra.Command, args []string) {
 		e := echo.New()
+
 		e.GET("/", func(c echo.Context) error {
 			return c.String(http.StatusOK, "Hello, World!")
 		})
+
 		e.Logger.Fatal(e.Start(":1323"))
 	},
 }
