@@ -20,6 +20,17 @@ var _ = Describe("Golang", func() {
 				Expect(err).To(BeNil())
 			})
 
+			It("returns nil when given 'github.com/jedi-knights/rankings", func() {
+				// Arrange
+				modulePath := "github.com/jedi-knights/rankings"
+
+				// Act
+				err := pkg.ValidateModulePath(modulePath)
+
+				// Assert
+				Expect(err).To(BeNil())
+			})
+
 			It("returns nil when given 'github.com/jdoe/my_project", func() {
 				// Arrange
 				modulePath := "github.com/jdoe/my_project"

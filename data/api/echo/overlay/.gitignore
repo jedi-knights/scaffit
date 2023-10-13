@@ -23,14 +23,17 @@ go.work
 # IntelliJ IDEA
 .idea
 
-# VS Code
-.vscode
-
-# Node.js
-node_modules
-
-scaffit
-
+# Test Results
 junit.xml
 
-.DS_Store
+package-lock.json
+
+node_modules/
+
+client/.angular
+client/dist
+output
+
+ecnl
+
+temp

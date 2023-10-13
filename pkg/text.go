@@ -8,7 +8,7 @@ import (
 func ContainsSpecialCharacters(part string) bool {
 	// Regular expression pattern to check for special characters, allowing underscores
 	// The pattern allows special characters !@#$%^&*()+=-`~[]{}\\|;:'\",<>\\(\\)?_.
-	specialCharacters := "!@#$%^&*()+=-`~[]{}\\\\|;:'\\\",<>\\\\(\\\\)?"
+	specialCharacters := "!@#$%^&*()+=`~[]{}\\\\|;:'\\\",<>\\\\(\\\\)?"
 
 	for _, char := range specialCharacters {
 		if strings.Contains(part, string(char)) {
@@ -22,7 +22,7 @@ func ContainsSpecialCharacters(part string) bool {
 func IsCamelCase(part string) bool {
 	// Regular expression pattern to check if a string is in camel case
 	// The pattern checks for lowercase letters followed by uppercase letters.
-	pattern := "^[a-z]+(?:[a-zA-Z0-9])*$"
+	pattern := "^[a-z]+(?:[a-zA-Z0-9-])*$"
 	return regexp.MustCompile(pattern).MatchString(part)
 }
 

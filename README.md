@@ -87,3 +87,4 @@ It assumes you have already created the parent command via `cobra add parent` fi
 - [Learn Go with tests](https://quii.gitbook.io/learn-go-with-tests/)
 - [Golang's Mocking Techniques](https://www.youtube.com/watch?v=LEnXBueFBzk&t=1401s)
 - [Generics in Go](https://www.youtube.com/watch?v=F8Gl8-3ZW0E)
+- [How to structure New Projects in Golang](https://www.youtube.com/watch?v=dJIUxvfSg6A)

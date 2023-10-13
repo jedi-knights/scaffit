@@ -2,8 +2,10 @@ package pkg
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 // FileSystemer is an interface that defines the interactions with the FileSystem
@@ -144,4 +146,42 @@ func (fs FileSystem) DeleteDirectory(path string) error {
 	}
 
 	return nil
+}
+
+func CopyFilesWithOverwrite(overlayDir, destinationDir string) error {
+	return filepath.Walk(overlayDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Calculate the destination path
+		destPath := filepath.Join(destinationDir, path[len(overlayDir):])
+
+		// If it's a directory, create it in the destination
+		if info.IsDir() {
+			return os.MkdirAll(destPath, info.Mode())
+		}
+
+		// If it's a file, copy it to the destination, overwriting if it exists
+		if !info.IsDir() {
+			srcFile, err := os.Open(path)
+			if err != nil {
+				return err
+			}
+			defer srcFile.Close()
+
+			destFile, err := os.Create(destPath)
+			if err != nil {
+				return err
+			}
+			defer destFile.Close()
+
+			_, err = io.Copy(destFile, srcFile)
+			if err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
 }
