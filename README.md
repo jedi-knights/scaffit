@@ -44,6 +44,32 @@ this assumes your module path was github.com/<username>/<project-name>
 So for example if you are creating a new project file that is supposed to go to your GitHub repo (assuming your
 GitHub username is jdoe) 
 
+```shell
+scaffit new module --location ~/temp
+```
+
+Project layout (~/temp/github.com/jdoe/myproject)
+--------------
+
+    ├─ .husky/          Husky hooks
+    ├─ assets/          an assets directory to drop things like images into
+    ├─ cmd/             a cmd directory to house generic commands (or cobra commands)
+    ├─ data/            a directory to house data access related files and/or models
+    ├─ docs/            a directory to house documentation related files
+    ├─ internal/        a directory to house internal packages
+    ├─ pkg/             a directory to house public packages
+    ├─ scripts/         a directory to house scripts
+    ├─ test/            a directory to house tests
+    ├─ .gitignore       a gitignore file
+    ├─ .golangci.yml    a golangci.yml file
+    ├─ .goreleaser.yml  a goreleaser.yml file
+    ├─ .editorconfig    an editorconfig file
+    ├─ .github/         a .github directory
+    │  └─ workflows/    a workflows directory for your actions
+    ├─ node_modules     a node_modules directory
+    └─ test/            tests (see test/README.md)
+
+
 > scaffit new --module-path=github.com/jdoe/myproject
 
 Case 1: I'm trying to create a new project that's destined for my personal GitHub repo.
