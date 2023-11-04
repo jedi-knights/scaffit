@@ -13,6 +13,83 @@ Scaffit is an interactive Go utility providing users with a consistent way to sc
 It is intended to be suitable for use creating a variety of types of projects.  Due to its interactive nature it
 should provide flexibility in the types of projects it can create.
 
+Ok, I just decided on a major change to scaffit.  I am developing projects in a lot of different languages and 
+I want to be able to use scaffit to create projects in all of them.  So I am going to make scaffit more generic.
+
+I am going to make scaffit a CLI tool that can be used to create projects in any language.  I will start with Go and React.
+I know what you are thinking, "Why would you want to create a React project with Go?"  Well, I don't.  But I do want to
+be able to customize a project with my own junk after using something like
+
+```bash
+npx create-react-app my-app
+```
+
+For example, I want to be able to create a React project with a custom Husky configuration.  Or conventional commits already 
+setup.  Along with a customized .editorconfig file etc.
+
+So the proposed change to scaffit would be like this
+
+To create a new module in Go.
+
+> scaffit new go module --location ~/temp
+
+To create a new CLI in Go.
+
+> scaffit new go cli --location ~/temp
+
+To create a new API in Go.
+
+> scaffit new go api --location ~/temp
+
+To create a new React project.
+
+> scaffit new react --location ~/temp
+
+To create a new React Native project.
+
+> scaffit new react-native --location ~/temp 
+
+To create a new Python FastAPI project.
+
+> scaffit new fast --location ~/temp
+
+
+## Questions I have after thinking about this change.
+
+
+
+### Question #1 - How do I incorporate templates for each type of project?
+
+### Question #2 - How do I organize my templates by project type?
+
+The number of template files could get out of hand quickly.  I need to figure out a way to organize them.
+and quickly modify them to extend the application.
+
+I should create a separate repo for the templates, that way once scaffit determined the project type it
+could read metadata from the templates repo to determine what to do next in the generation process.
+
+The templates could require scaffit to ask the user additional questions before deciding which templates
+to apply in the generation process.
+
+### Question #3 - What if I want to build composite projects
+
+For example a single repo containing a react app and a FastAPI app along with docker compose?
+
+Answer: Ask the user if it is a simple or composite project.
+
+### Question #4 - How will the user know which types of templates are available?
+
+Scaffit will have to provide some sort of listing or query capability where in 
+it would process the templates from the templates repo providing some sort of 
+summary of what is available to the user.
+
+This process can and will evolve without direct modification of the scaffit
+utility itself as the templates take on a life of their own.
+
+### Question #5 - How will the user know what questions to ask?
+
+### Question #6 - What's the best way to organize the templates repo?
+
 
 ## What does it take to make a module go gettable?
 
@@ -97,6 +174,31 @@ cobra add child -p 'parentCmd'
 
 This should add a new subcommand named child to the parent command.
 It assumes you have already created the parent command via `cobra add parent` first
+
+I just took a look at [this video](https://www.youtube.com/watch?v=dxPakeBsgl4) on YouTube.  He talks 
+about accepted Go project structure.
+
+bin
+cmd
+    main
+        main.go // entry point
+internal
+    module1/
+        module1.go
+go.mod
+go.sum
+README.md
+
+the main difference between internal and pkg is internal is only available to your project
+
+
+go mod init github.com/melkey/goProjectStructure
+mkdir -p bin cmd/goProjectStructure internal tests
+touch Makefile
+touch cmd/goProjectStructure/main.go
+mkdir -p internal/routes
+touch internal/routes/routes.go
+
 
 ## References
 
