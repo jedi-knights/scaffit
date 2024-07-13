@@ -3,7 +3,6 @@ package pkg
 import (
 	"fmt"
 	"log"
-	"strings"
 )
 
 const ignoreListUri = "https://raw.githubusercontent.com/github/gitignore/master/Go.gitignore"
@@ -69,31 +68,4 @@ func (g Golang) Commands(location, modulePath string) []*Command {
 	}
 
 	return commands
-}
-
-// ValidateModulePath validates the input string to ensure it is a valid module name.
-//
-// Module names should be in lowercase letters and avoid hyphens (-) or special characters.
-// Use underscores or camelCase for multi-word module names. For example, mylibrary or
-// myLibrary.
-func ValidateModulePath(input string) error {
-	// Split the input string on '/'
-	parts := strings.Split(input, "/")
-
-	// Check each part individually
-	for _, part := range parts {
-		if ContainsSpecialCharacters(part) {
-			return fmt.Errorf("module path part contains special characters: %s", part)
-		}
-
-		if ContainsWhitespace(part) {
-			return fmt.Errorf("module path part contains whitespace characters: %s", part)
-		}
-
-		if !strings.Contains(part, ".") && !strings.Contains(part, "_") && !IsCamelCase(part) {
-			return fmt.Errorf("module path part is not in camel case: %s", part)
-		}
-	}
-
-	return nil
 }

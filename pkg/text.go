@@ -34,6 +34,6 @@ func ContainsWhitespace(part string) bool {
 	// Compile the regular expression
 	re := regexp.MustCompile(whiteSpacePattern)
 
-	// Use the regular expression to find whitespace characters in the input string
+	// Use the regular expression to find whitespace characters in the userInput string
 	return re.MatchString(part)
 }

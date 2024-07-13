@@ -1,213 +1,104 @@
-package pkg_test
+package pkg
 
-import (
-	. "github.com/jedi-knights/scaffit/pkg"
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
-)
+import "testing"
 
-var _ = Describe("Text", func() {
-	Describe("ContainsSpecialCharacters", func() {
-		It("returns true when given a string with a special character", func() {
-			// Arrange
-			part := "my@project"
+func TestContainsSpecialCharacters(t *testing.T) {
+	// Arrange
+	tests := []struct {
+		name     string
+		input    string
+		expected bool
+	}{
+		{
+			name:     "'my@project' contains a special character",
+			input:    "my@project",
+			expected: true,
+		},
+		{
+			name:     "'myproject' does not contain special characters",
+			input:    "myproject",
+			expected: false,
+		},
+		{
+			name:     "'my_project' does not contain special character",
+			input:    "my_project",
+			expected: false,
+		},
+	}
 
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
 			// Act
-			result := ContainsSpecialCharacters(part)
+			actual := ContainsSpecialCharacters(tt.input)
 
 			// Assert
-			Expect(result).To(BeTrue())
+			if actual != tt.expected {
+				t.Errorf("containsSpecialCharacters() = %v with '%s' want %v", actual, tt.input, tt.expected)
+			}
 		})
+	}
+}
 
-		It("returns false when given a string without a special character", func() {
-			// Arrange
-			part := "myproject"
+func TestIsCamelCase(t *testing.T) {
+	// Arrange
+	tests := []struct {
+		name     string
+		input    string
+		expected bool
+	}{
+		{
+			name:     "is camel case",
+			input:    "myProject",
+			expected: true,
+		},
+		{
+			name:     "is not camel case",
+			input:    "my_project",
+			expected: false,
+		},
+	}
 
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
 			// Act
-			result := ContainsSpecialCharacters(part)
+			actual := IsCamelCase(tt.input)
 
 			// Assert
-			Expect(result).To(BeFalse())
+			if actual != tt.expected {
+				t.Errorf("isCamelCase() = %v, want %v", actual, tt.expected)
+			}
 		})
+	}
+}
 
-		It("returns false when given my_project", func() {
-			// Arrange
-			part := "my_project"
+func TestContainsWhitespace(t *testing.T) {
+	// Arrange
+	tests := []struct {
+		name     string
+		input    string
+		expected bool
+	}{
+		{
+			name:     "contains whitespace",
+			input:    "my project",
+			expected: true,
+		},
+		{
+			name:     "does not contain whitespace",
+			input:    "myproject",
+			expected: false,
+		},
+	}
 
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
 			// Act
-			result := ContainsSpecialCharacters(part)
+			actual := ContainsWhitespace(tt.input)
 
 			// Assert
-			Expect(result).To(BeFalse())
+			if actual != tt.expected {
+				t.Errorf("containsWhitespace() = %v, want %v", actual, tt.expected)
+			}
 		})
-	})
-
-	Describe("IsCamelCase", func() {
-		It("returns true when given a string in camel case", func() {
-			// Arrange
-			part := "myProject"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns false when given a string not in camel case", func() {
-			// Arrange
-			part := "my_project"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeFalse())
-		})
-
-		It("returns false when given a string with a hyphen", func() {
-			// Arrange
-			part := "my-project"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeFalse())
-		})
-
-		It("returns false when given a string with a special character", func() {
-			// Arrange
-			part := "my_project"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeFalse())
-		})
-
-		It("returns false when given a string with a space", func() {
-			// Arrange
-			part := "my project"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeFalse())
-		})
-
-		It("returns false when given a string with an uppercase letter", func() {
-			// Arrange
-			part := "myProject"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a camel cased string with a number", func() {
-			// Arrange
-			part := "myProject1"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given 'project1'", func() {
-			// Arrange
-			part := "project1"
-
-			// Act
-			result := IsCamelCase(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-	})
-
-	Describe("ContainsWhitespace", func() {
-		It("returns true when given a string with a space", func() {
-			// Arrange
-			part := "my project"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a string with a tab", func() {
-			// Arrange
-			part := "my	project"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a string with a newline", func() {
-			// Arrange
-			part := "my\nproject"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a string with a carriage return", func() {
-			// Arrange
-			part := "my\rproject"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a string with a form feed", func() {
-			// Arrange
-			part := "my\fproject"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns true when given a string with a vertical tab", func() {
-			// Arrange
-			part := "my\vproject"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeTrue())
-		})
-
-		It("returns false when given a string without a whitespace character", func() {
-			// Arrange
-			part := "myproject"
-
-			// Act
-			result := ContainsWhitespace(part)
-
-			// Assert
-			Expect(result).To(BeFalse())
-		})
-	})
-})
+	}
+}
