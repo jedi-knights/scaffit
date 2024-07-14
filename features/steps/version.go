@@ -20,3 +20,8 @@ func iExecuteTheVersionCommand() error {
 func iShouldSeeTheVersionFromTheVERSIONFile() error {
 	return godog.ErrPending
 }
+
+func InitializeVersionSteps(ctx *godog.ScenarioContext) {
+	ctx.Step(`^I execute the version command$`, iExecuteTheVersionCommand)
+	ctx.Step(`^I should see the version from the VERSION file$`, iShouldSeeTheVersionFromTheVERSIONFile)
+}
