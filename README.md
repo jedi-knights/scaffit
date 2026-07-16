@@ -3,7 +3,6 @@
 A Go utility to consistently scaffold Go projects.
 
 [![CI](https://github.com/jedi-knights/scaffit/actions/workflows/ci.yml/badge.svg)](https://github.com/jedi-knights/scaffit/actions/workflows/ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jedi-knights/scaffit)](https://goreportcard.com/report/github.com/jedi-knights/scaffit)
 [![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/jedi-knights/scaffit)](https://pkg.go.dev/mod/github.com/jedi-knights/scaffit)
 
 # Overview
